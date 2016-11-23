@@ -4,4 +4,11 @@
 bin/
 lib/
 include/
+tmp*
+datadump.json
+db.json
+.idea
+
+
+
 

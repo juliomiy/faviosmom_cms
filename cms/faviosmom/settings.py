@@ -48,6 +48,9 @@ WSGI_APPLICATION = 'faviosmom.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 
+# Google Analytics
+GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-84561097-1'
+GOOGLE_ANALYTICS_DOMAIN = 'faviosmom.com'
 
 
 # Internationalization
@@ -57,9 +60,9 @@ LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'America/New_York'
 
-USE_I18N = False
+USE_I18N = True
 
-USE_L10N = False
+USE_L10N = True
 
 USE_TZ = True
 
@@ -92,6 +95,7 @@ TEMPLATES = [
     'django.core.context_processors.media',
     'django.core.context_processors.csrf',
     'django.core.context_processors.tz',
+    'faviosmom.context_processor.google_analytics',
     'sekizai.context_processors.sekizai',
     'django.core.context_processors.static',
     'cms.context_processors.cms_settings'
@@ -149,7 +153,10 @@ INSTALLED_APPS = (
     'djangocms_video',
     'aldryn_style',
     'aldryn_bootstrap3',
-    'faviosmom'
+    'oauth2_provider',
+    'polls',
+    'faviosmom',
+    'product',
 )
 
 LANGUAGES = (
@@ -179,6 +186,8 @@ CMS_TEMPLATES = (
     ## Customize this
     ('base.html', 'Fullwidth'),
     ('feature.html', 'Feature'),
+    ('about.html','About'),
+    ('contact.html','Contact'),
 )
 
 CMS_PERMISSION = True
@@ -188,14 +197,26 @@ CMS_PLACEHOLDER_CONF = {}
 DATABASES = {
     'default': {
         'CONN_MAX_AGE': 0,
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
         'HOST': 'localhost',
-        'NAME': 'project.db',
+        'NAME': 'faviosmom_cms',
         'PASSWORD': '',
-        'PORT': '',
-        'USER': ''
+        'PORT': '3306',
+        'USER': 'root'
+    },
+    'product': {
+        'CONN_MAX_AGE': 0,
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'localhost',
+        'NAME': 'faviosmom',
+        'PASSWORD': '',
+        'PORT': '3306',
+        'USER': 'root'
     }
 }
+DATABASE_ROUTERS = [ 'faviosmom.database_router.DatabaseAppsRouter',]
+
+DATABASE_APPS_MAPPING = {'product': 'product'}
 
 MIGRATION_MODULES = {
     

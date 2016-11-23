@@ -23,7 +23,7 @@ $(function() {
                 firstName = name.split(' ').slice(0, -1).join(' ');
             }
             $.ajax({
-                url: "./bin/contact_me.php",
+                url: "http://localhost:8001/v1/contact/",
                 type: "POST",
                 data: {
                     name: name,
