@@ -8,98 +8,129 @@
 # Also note: You'll have to insert the output of 'django-admin sqlcustom [app_label]'
 # into your database.
 from __future__ import unicode_literals
-
+from cms.models.pluginmodel import CMSPlugin
 from django.db import models
 from datetime import datetime
 import re
+import json
 
-class Menuportions(models.Model):
-    menu = models.ForeignKey('Menu')
-    name = models.CharField(unique=True, max_length=255)
-    unit_price = models.DecimalField(max_digits=10, decimal_places=2)
-    available = models.BooleanField()
+class BaseProductTable(models.Model):
     insert_datetime = models.DateTimeField(default=datetime.now)
     update_datetime = models.DateTimeField(blank=True, null=True)
 
     class Meta:
+        abstract = True  # Set this model as Abstract
+
+    def getNormalized(self,string):
+        return re.sub(r'[^a-zA-Z]', '', string.lower())
+
+class Menuportions(BaseProductTable):
+    menu = models.ForeignKey('Menu')
+    name = models.CharField(unique=True, max_length=255)
+    unit_price = models.DecimalField(max_digits=10, decimal_places=2)
+    available = models.BooleanField(default=False)
+
+    class Meta:
         managed = True
-        db_table = 'MenuPortions'
+        db_table = 'MenuPortion'
 
 
     def __str__(self):  # __unicode__ on Python 2
         return self.name
 
-class Orders(models.Model):
+class Orders(BaseProductTable):
     userid = models.CharField(max_length=255)
-    order_json = models.CharField(max_length=1000, blank=True, null=True)
+    order_json = models.TextField(blank=True, null=True)
     order_price = models.DecimalField(max_digits=10, decimal_places=2)
     order_tax = models.DecimalField(max_digits=10, decimal_places=2)
     order_total = models.DecimalField(max_digits=10, decimal_places=2)
-    fulfilled = models.IntegerField()
+    delivery_charge = models.DecimalField(max_digits=5, decimal_places=2)
+    fulfilled = models.BooleanField()
     fulfilled_datetime = models.DateTimeField()
-    insert_datetime = models.DateTimeField()
-    update_datetime = models.DateTimeField(blank=True, null=True)
+    orderID = models.CharField(max_length=255,unique=True)
 
     class Meta:
         managed = True
-        db_table = 'Orders'
+        db_table = 'customer_order'
 
+    def __str__(self):
+        return self.order_json
 
-class BusinessDetail(models.Model):
+class BusinessDetail(BaseProductTable):
     location = models.TextField(blank=True, null=True)  # This field type is a guess.
     closed_days = models.TextField(blank=True, null=True)  # This field type is a guess.
-    insert_date = models.DateTimeField(default=datetime.now)
-    update_date = models.DateTimeField(blank=True, null=True)
     current_location = models.TextField(blank=True, null=True)  # This field type is a guess.
 
     class Meta:
         managed = True
         db_table = 'business_detail'
 
+    def save(self, *args, **kwargs):
+        d = {
+            'first_name': 'Guido',
+            'second_name': 'Rossum',
+            'titles': ['BDFL', 'Developer'],
+        }
+        self.location = json.dumps(d)
 
-class Menu(models.Model):
+        if self.pk is not None:
+            self.update_datetime = datetime.now()
+        super(BusinessDetail, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.location
+
+class Menu(BaseProductTable):
     short_description = models.CharField(max_length=255, blank=True, null=True)
     long_description = models.TextField(blank=True, null=True)
     name = models.CharField(unique=True, max_length=45)
-    insert_date = models.DateTimeField(default=datetime.now)
-    update_date = models.DateTimeField(blank=True, null=True)
     normalized_name = models.CharField(unique=True, max_length=45, blank=True, null=True)
-    available = models.IntegerField()
+    available = models.BooleanField(default=False)
+    photo_url = models.CharField(max_length=255, blank=True, null=True)
+    article_url = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         managed = True
         db_table = 'menu'
 
+    def save(self, *args, **kwargs):
+        self.normalized_name = self.getNormalized(self.name)
+        if self.pk is not None:
+           self.update_datetime = datetime.now()
+
+        super(Menu, self).save(*args, **kwargs)
 
     def __str__(self):  # __unicode__ on Python 2
        return self.name
 
 
-class MenuItems(models.Model):
+class MenuItems(BaseProductTable):
     menu = models.ForeignKey(Menu)
-    insert_date = models.DateTimeField(default=datetime.now)
-    update_date = models.DateTimeField(blank=True, null=True)
     portion_size = models.CharField(max_length=45)
-    name = models.CharField(max_length=45)
+    name = models.CharField(unique=True, max_length=45)
     price = models.DecimalField(max_digits=5, decimal_places=2)
-    available = models.BooleanField()
+    available = models.BooleanField(default=True)
     photo_url = models.CharField(max_length=255, blank=True, null=True)
     article_url = models.CharField(max_length=255, blank=True, null=True)
-    vegetarian = models.BooleanField()
+    vegetarian = models.BooleanField(default=False)
     normalized_name = models.CharField(unique=True, max_length=45)
 
     class Meta:
         managed = True
         db_table = 'menu_items'
 
+    def save(self, *args, **kwargs):
+        self.normalized_name = self.getNormalized(self.name)
+        if self.pk is not None:
+            self.update_datetime = datetime.now()
+
+        super(MenuItems, self).save(*args, **kwargs)
 
     def __str__(self):  # __unicode__ on Python 2
         return self.name
 
 
-class Order(models.Model):
-    insert_date = models.DateTimeField(default=datetime.now)
-    update_date = models.DateTimeField(blank=True, null=True)
+class Order(BaseProductTable):
     order = models.TextField()  # This field type is a guess.
     total_order_price = models.DecimalField(max_digits=9, decimal_places=2)
     sales_tax = models.DecimalField(max_digits=9, decimal_places=2)
@@ -115,7 +146,7 @@ class Order(models.Model):
     def __str__(self):
         return self.order
 
-class PhraseToMenuitems(models.Model):
+class PhraseToMenuitems(BaseProductTable):
     long_phrase = models.CharField(unique=True, max_length=255)
     normalized = models.CharField(unique=True, max_length=255, blank=True, null=True)
     menuitem = models.ForeignKey(MenuItems)
@@ -125,20 +156,26 @@ class PhraseToMenuitems(models.Model):
         db_table = 'phrase_to_menuitems'
 
     def save(self, *args, **kwargs):
-        self.normalized = re.sub(r'[^a-zA-Z]','',self.long_phrase)
+        self.normalized = self.getNormalized(self.long_phrase)
+        if self.pk is not None:
+            self.update_date = datetime.now()
         super(PhraseToMenuitems, self).save(*args, **kwargs)
 
     def __str__(self):  # __unicode__ on Python 2
-        return self.long_phrase
+        return ("Phrase: "  + self.long_phrase + "|| menuItem: " + self.menuitem.name)
 
-class TypeToMenuitems(models.Model):
+class TypeToMenuitems(BaseProductTable):
     type = models.CharField(max_length=45)
     menuitem = models.ForeignKey(MenuItems)
-    insert_date = models.DateTimeField(default=datetime.now)
-    update_date = models.DateTimeField(blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if self.pk is not None:
+            self.update_datetime = datetime.now()
+        super(TypeToMenuitems, self).save(*args, **kwargs)
 
     def __str__(self):  # __unicode__ on Python 2
-        return self.type
+        return ("Type: " + self.type + " MenuItem: " + self.menuitem.name)
+
 
     class Meta:
         managed = True

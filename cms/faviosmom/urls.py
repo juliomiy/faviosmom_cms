@@ -8,6 +8,7 @@ from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+
 admin.autodiscover()
 
 urlpatterns = [
@@ -19,6 +20,7 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns('',
+    url(r'^menu/', include('product.urls', namespace='product')),
     url(r'^admin/', include(admin.site.urls)),  # NOQA
     url(r'^', include('cms.urls')),
 )
