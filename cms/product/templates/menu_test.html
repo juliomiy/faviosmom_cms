@@ -1,12 +1,29 @@
 {% extends "base.html" %}
-{% load cms_tags %}
+{% load cms_tags static %}
+{% load product_extras %}
 
 {% block title %}{% page_attribute "page_title" %}{% endblock title %}
 
 {% block content %}
+<div class="row">
+        {% for choice in menu.all %}
+           <div class="col-sm-4 col-lg-4 col-md-4">
+                <div class="thumbnail">
+                    <img src="{% static "media/cuban_sandwich-320x150.jpg" %}" alt="">
+                    <div class="caption">
+                        <h4><a href="/">{{ choice.name }}</a></h4>
+                        <p>{{ choice.short_description }}</p>
+                        <h4 class="pull-left">{{ choice.portion_size }}</h4>
+                        <h4 class="pull-right">{{ choice.price|currency }}</h4>
+
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
+</div>
 <ul>
 {% for choice in menu.all %}
-    <li><a href="{{ choice.id }}">{{ choice.name }}</a> </li>
+    <li><a href="{{ choice.normalized_name }}">{{ choice.name }}</a> </li>
 {% endfor %}
 </ul>
 {% endblock content %}

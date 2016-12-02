@@ -154,7 +154,6 @@ INSTALLED_APPS = (
     'aldryn_style',
     'aldryn_bootstrap3',
     'oauth2_provider',
-    'polls',
     'faviosmom',
     'product',
 )
