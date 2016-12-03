@@ -197,18 +197,18 @@ DATABASES = {
     'default': {
         'CONN_MAX_AGE': 0,
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
+        'HOST': '146.148.100.114',
         'NAME': 'faviosmom_cms',
-        'PASSWORD': '',
+        'PASSWORD': 'Yankees5a',
         'PORT': '3306',
         'USER': 'root'
     },
     'product': {
         'CONN_MAX_AGE': 0,
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
-        'NAME': 'faviosmom',
-        'PASSWORD': '',
+        'HOST': '146.148.100.114',
+        'NAME': 'faviosmom_new',
+        'PASSWORD': 'Yankees5a',
         'PORT': '3306',
         'USER': 'root'
     }

@@ -81,6 +81,7 @@ class BusinessDetail(BaseProductTable):
         return self.location
 
 class Menu(BaseProductTable):
+    one_liner = models.CharField(max_length=75, blank=True, null=True)
     short_description = models.CharField(max_length=255, blank=True, null=True)
     long_description = models.TextField(blank=True, null=True)
     name = models.CharField(unique=True, max_length=45)
@@ -116,6 +117,7 @@ class MenuItems(BaseProductTable):
     normalized_name = models.CharField(unique=True, max_length=45)
     short_description = models.CharField(max_length=255, blank=True, null=True)
     long_description = models.TextField(blank=True, null=True)
+    one_liner = models.CharField(max_length=75, blank=True, null=True)
 
     class Meta:
         managed = True
