@@ -16,6 +16,70 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `MenuPortions`
+--
+
+DROP TABLE IF EXISTS `MenuPortions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MenuPortions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `insert_date` datetime(6) NOT NULL,
+  `update_date` datetime(6) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `unit_price` decimal(10,2) NOT NULL,
+  `available` tinyint(1) NOT NULL,
+  `insert_datetime` datetime(6) NOT NULL,
+  `update_datetime` datetime(6) DEFAULT NULL,
+  `menu_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `MenuPortions_menu_id_908913465daa172_fk_menu_id` (`menu_id`),
+  CONSTRAINT `MenuPortions_menu_id_908913465daa172_fk_menu_id` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MenuPortions`
+--
+
+LOCK TABLES `MenuPortions` WRITE;
+/*!40000 ALTER TABLE `MenuPortions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `MenuPortions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Orders`
+--
+
+DROP TABLE IF EXISTS `Orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` varchar(255) NOT NULL,
+  `order_json` varchar(1000) DEFAULT NULL,
+  `order_price` decimal(10,2) NOT NULL,
+  `order_tax` decimal(10,2) NOT NULL,
+  `order_total` decimal(10,2) NOT NULL,
+  `fulfilled` int(11) NOT NULL,
+  `fulfilled_datetime` datetime(6) NOT NULL,
+  `insert_datetime` datetime(6) NOT NULL,
+  `update_datetime` datetime(6) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Orders`
+--
+
+LOCK TABLES `Orders` WRITE;
+/*!40000 ALTER TABLE `Orders` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `aldryn_bootstrap3_boostrap3alertplugin`
 --
 
@@ -755,7 +819,7 @@ CREATE TABLE `auth_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `content_type_id` (`content_type_id`,`codename`),
   CONSTRAINT `auth__content_type_id_508cf46651277a81_fk_django_content_type_id` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=225 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=252 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -764,7 +828,7 @@ CREATE TABLE `auth_permission` (
 
 LOCK TABLES `auth_permission` WRITE;
 /*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
-INSERT INTO `auth_permission` VALUES (1,'Can use Structure mode',1,'use_structure'),(2,'Can change page',2,'change_page'),(3,'Can add permission',3,'add_permission'),(4,'Can change permission',3,'change_permission'),(5,'Can delete permission',3,'delete_permission'),(6,'Can add group',4,'add_group'),(7,'Can change group',4,'change_group'),(8,'Can delete group',4,'delete_group'),(9,'Can add user',5,'add_user'),(10,'Can change user',5,'change_user'),(11,'Can delete user',5,'delete_user'),(12,'Can add content type',6,'add_contenttype'),(13,'Can change content type',6,'change_contenttype'),(14,'Can delete content type',6,'delete_contenttype'),(15,'Can add session',7,'add_session'),(16,'Can change session',7,'change_session'),(17,'Can delete session',7,'delete_session'),(18,'Can add log entry',8,'add_logentry'),(19,'Can change log entry',8,'change_logentry'),(20,'Can delete log entry',8,'delete_logentry'),(21,'Can add site',9,'add_site'),(22,'Can change site',9,'change_site'),(23,'Can delete site',9,'delete_site'),(24,'Can add user setting',10,'add_usersettings'),(25,'Can change user setting',10,'change_usersettings'),(26,'Can delete user setting',10,'delete_usersettings'),(27,'Can add page',2,'add_page'),(28,'Can delete page',2,'delete_page'),(29,'Can view page',2,'view_page'),(30,'Can publish page',2,'publish_page'),(31,'Can edit static placeholders',2,'edit_static_placeholder'),(32,'Can add Page global permission',11,'add_globalpagepermission'),(33,'Can change Page global permission',11,'change_globalpagepermission'),(34,'Can delete Page global permission',11,'delete_globalpagepermission'),(35,'Can add Page permission',12,'add_pagepermission'),(36,'Can change Page permission',12,'change_pagepermission'),(37,'Can delete Page permission',12,'delete_pagepermission'),(38,'Can add User (page)',13,'add_pageuser'),(39,'Can change User (page)',13,'change_pageuser'),(40,'Can delete User (page)',13,'delete_pageuser'),(41,'Can add User group (page)',14,'add_pageusergroup'),(42,'Can change User group (page)',14,'change_pageusergroup'),(43,'Can delete User group (page)',14,'delete_pageusergroup'),(44,'Can add placeholder',1,'add_placeholder'),(45,'Can change placeholder',1,'change_placeholder'),(46,'Can delete placeholder',1,'delete_placeholder'),(47,'Can add cms plugin',15,'add_cmsplugin'),(48,'Can change cms plugin',15,'change_cmsplugin'),(49,'Can delete cms plugin',15,'delete_cmsplugin'),(50,'Can add title',16,'add_title'),(51,'Can change title',16,'change_title'),(52,'Can delete title',16,'delete_title'),(53,'Can add placeholder reference',17,'add_placeholderreference'),(54,'Can change placeholder reference',17,'change_placeholderreference'),(55,'Can delete placeholder reference',17,'delete_placeholderreference'),(56,'Can add static placeholder',18,'add_staticplaceholder'),(57,'Can change static placeholder',18,'change_staticplaceholder'),(58,'Can delete static placeholder',18,'delete_staticplaceholder'),(59,'Can add alias plugin model',19,'add_aliaspluginmodel'),(60,'Can change alias plugin model',19,'change_aliaspluginmodel'),(61,'Can delete alias plugin model',19,'delete_aliaspluginmodel'),(62,'Can add urlconf revision',20,'add_urlconfrevision'),(63,'Can change urlconf revision',20,'change_urlconfrevision'),(64,'Can delete urlconf revision',20,'delete_urlconfrevision'),(65,'Can add cache key',21,'add_cachekey'),(66,'Can change cache key',21,'change_cachekey'),(67,'Can delete cache key',21,'delete_cachekey'),(68,'Can add text',22,'add_text'),(69,'Can change text',22,'change_text'),(70,'Can delete text',22,'delete_text'),(71,'Can add Folder',23,'add_folder'),(72,'Can change Folder',23,'change_folder'),(73,'Can delete Folder',23,'delete_folder'),(74,'Can use directory listing',23,'can_use_directory_listing'),(75,'Can add folder permission',24,'add_folderpermission'),(76,'Can change folder permission',24,'change_folderpermission'),(77,'Can delete folder permission',24,'delete_folderpermission'),(78,'Can add file',25,'add_file'),(79,'Can change file',25,'change_file'),(80,'Can delete file',25,'delete_file'),(81,'Can add clipboard',26,'add_clipboard'),(82,'Can change clipboard',26,'change_clipboard'),(83,'Can delete clipboard',26,'delete_clipboard'),(84,'Can add clipboard item',27,'add_clipboarditem'),(85,'Can change clipboard item',27,'change_clipboarditem'),(86,'Can delete clipboard item',27,'delete_clipboarditem'),(87,'Can add image',28,'add_image'),(88,'Can change image',28,'change_image'),(89,'Can delete image',28,'delete_image'),(90,'Can add thumbnail option',29,'add_thumbnailoption'),(91,'Can change thumbnail option',29,'change_thumbnailoption'),(92,'Can delete thumbnail option',29,'delete_thumbnailoption'),(93,'Can add source',30,'add_source'),(94,'Can change source',30,'change_source'),(95,'Can delete source',30,'delete_source'),(96,'Can add thumbnail',31,'add_thumbnail'),(97,'Can change thumbnail',31,'change_thumbnail'),(98,'Can delete thumbnail',31,'delete_thumbnail'),(99,'Can add thumbnail dimensions',32,'add_thumbnaildimensions'),(100,'Can change thumbnail dimensions',32,'change_thumbnaildimensions'),(101,'Can delete thumbnail dimensions',32,'delete_thumbnaildimensions'),(102,'Can add multi columns',33,'add_multicolumns'),(103,'Can change multi columns',33,'change_multicolumns'),(104,'Can delete multi columns',33,'delete_multicolumns'),(105,'Can add column',34,'add_column'),(106,'Can change column',34,'change_column'),(107,'Can delete column',34,'delete_column'),(108,'Can add link',35,'add_link'),(109,'Can change link',35,'change_link'),(110,'Can delete link',35,'delete_link'),(111,'Can add filer file',36,'add_filerfile'),(112,'Can change filer file',36,'change_filerfile'),(113,'Can delete filer file',36,'delete_filerfile'),(114,'Can add filer folder',37,'add_filerfolder'),(115,'Can change filer folder',37,'change_filerfolder'),(116,'Can delete filer folder',37,'delete_filerfolder'),(117,'Can add filer image',38,'add_filerimage'),(118,'Can change filer image',38,'change_filerimage'),(119,'Can delete filer image',38,'delete_filerimage'),(120,'Can add Snippet',39,'add_snippet'),(121,'Can change Snippet',39,'change_snippet'),(122,'Can delete Snippet',39,'delete_snippet'),(123,'Can add Snippet',40,'add_snippetptr'),(124,'Can change Snippet',40,'change_snippetptr'),(125,'Can delete Snippet',40,'delete_snippetptr'),(126,'Can add google map',41,'add_googlemap'),(127,'Can change google map',41,'change_googlemap'),(128,'Can delete google map',41,'delete_googlemap'),(129,'Can add video player',42,'add_videoplayer'),(130,'Can change video player',42,'change_videoplayer'),(131,'Can delete video player',42,'delete_videoplayer'),(132,'Can add video source',43,'add_videosource'),(133,'Can change video source',43,'change_videosource'),(134,'Can delete video source',43,'delete_videosource'),(135,'Can add video track',44,'add_videotrack'),(136,'Can change video track',44,'change_videotrack'),(137,'Can delete video track',44,'delete_videotrack'),(138,'Can add style',45,'add_style'),(139,'Can change style',45,'change_style'),(140,'Can delete style',45,'delete_style'),(141,'Can add boostrap3 button plugin',46,'add_boostrap3buttonplugin'),(142,'Can change boostrap3 button plugin',46,'change_boostrap3buttonplugin'),(143,'Can delete boostrap3 button plugin',46,'delete_boostrap3buttonplugin'),(144,'Can add boostrap3 blockquote plugin',47,'add_boostrap3blockquoteplugin'),(145,'Can change boostrap3 blockquote plugin',47,'change_boostrap3blockquoteplugin'),(146,'Can delete boostrap3 blockquote plugin',47,'delete_boostrap3blockquoteplugin'),(147,'Can add boostrap3 icon plugin',48,'add_boostrap3iconplugin'),(148,'Can change boostrap3 icon plugin',48,'change_boostrap3iconplugin'),(149,'Can delete boostrap3 icon plugin',48,'delete_boostrap3iconplugin'),(150,'Can add boostrap3 label plugin',49,'add_boostrap3labelplugin'),(151,'Can change boostrap3 label plugin',49,'change_boostrap3labelplugin'),(152,'Can delete boostrap3 label plugin',49,'delete_boostrap3labelplugin'),(153,'Can add boostrap3 well plugin',50,'add_boostrap3wellplugin'),(154,'Can change boostrap3 well plugin',50,'change_boostrap3wellplugin'),(155,'Can delete boostrap3 well plugin',50,'delete_boostrap3wellplugin'),(156,'Can add boostrap3 alert plugin',51,'add_boostrap3alertplugin'),(157,'Can change boostrap3 alert plugin',51,'change_boostrap3alertplugin'),(158,'Can delete boostrap3 alert plugin',51,'delete_boostrap3alertplugin'),(159,'Can add boostrap3 image plugin',52,'add_boostrap3imageplugin'),(160,'Can change boostrap3 image plugin',52,'change_boostrap3imageplugin'),(161,'Can delete boostrap3 image plugin',52,'delete_boostrap3imageplugin'),(162,'Can add boostrap3 spacer plugin',53,'add_boostrap3spacerplugin'),(163,'Can change boostrap3 spacer plugin',53,'change_boostrap3spacerplugin'),(164,'Can delete boostrap3 spacer plugin',53,'delete_boostrap3spacerplugin'),(165,'Can add bootstrap3 file plugin',54,'add_bootstrap3fileplugin'),(166,'Can change bootstrap3 file plugin',54,'change_bootstrap3fileplugin'),(167,'Can delete bootstrap3 file plugin',54,'delete_bootstrap3fileplugin'),(168,'Can add boostrap3 panel plugin',55,'add_boostrap3panelplugin'),(169,'Can change boostrap3 panel plugin',55,'change_boostrap3panelplugin'),(170,'Can delete boostrap3 panel plugin',55,'delete_boostrap3panelplugin'),(171,'Can add boostrap3 panel heading plugin',56,'add_boostrap3panelheadingplugin'),(172,'Can change boostrap3 panel heading plugin',56,'change_boostrap3panelheadingplugin'),(173,'Can delete boostrap3 panel heading plugin',56,'delete_boostrap3panelheadingplugin'),(174,'Can add boostrap3 panel body plugin',57,'add_boostrap3panelbodyplugin'),(175,'Can change boostrap3 panel body plugin',57,'change_boostrap3panelbodyplugin'),(176,'Can delete boostrap3 panel body plugin',57,'delete_boostrap3panelbodyplugin'),(177,'Can add boostrap3 panel footer plugin',58,'add_boostrap3panelfooterplugin'),(178,'Can change boostrap3 panel footer plugin',58,'change_boostrap3panelfooterplugin'),(179,'Can delete boostrap3 panel footer plugin',58,'delete_boostrap3panelfooterplugin'),(180,'Can add bootstrap3 row plugin',59,'add_bootstrap3rowplugin'),(181,'Can change bootstrap3 row plugin',59,'change_bootstrap3rowplugin'),(182,'Can delete bootstrap3 row plugin',59,'delete_bootstrap3rowplugin'),(183,'Can add bootstrap3 column plugin',60,'add_bootstrap3columnplugin'),(184,'Can change bootstrap3 column plugin',60,'change_bootstrap3columnplugin'),(185,'Can delete bootstrap3 column plugin',60,'delete_bootstrap3columnplugin'),(186,'Can add bootstrap3 accordion plugin',61,'add_bootstrap3accordionplugin'),(187,'Can change bootstrap3 accordion plugin',61,'change_bootstrap3accordionplugin'),(188,'Can delete bootstrap3 accordion plugin',61,'delete_bootstrap3accordionplugin'),(189,'Can add bootstrap3 accordion item plugin',62,'add_bootstrap3accordionitemplugin'),(190,'Can change bootstrap3 accordion item plugin',62,'change_bootstrap3accordionitemplugin'),(191,'Can delete bootstrap3 accordion item plugin',62,'delete_bootstrap3accordionitemplugin'),(192,'Can add bootstrap3 list group plugin',63,'add_bootstrap3listgroupplugin'),(193,'Can change bootstrap3 list group plugin',63,'change_bootstrap3listgroupplugin'),(194,'Can delete bootstrap3 list group plugin',63,'delete_bootstrap3listgroupplugin'),(195,'Can add bootstrap3 list group item plugin',64,'add_bootstrap3listgroupitemplugin'),(196,'Can change bootstrap3 list group item plugin',64,'change_bootstrap3listgroupitemplugin'),(197,'Can delete bootstrap3 list group item plugin',64,'delete_bootstrap3listgroupitemplugin'),(198,'Can add bootstrap3 carousel plugin',65,'add_bootstrap3carouselplugin'),(199,'Can change bootstrap3 carousel plugin',65,'change_bootstrap3carouselplugin'),(200,'Can delete bootstrap3 carousel plugin',65,'delete_bootstrap3carouselplugin'),(201,'Can add bootstrap3 carousel slide plugin',66,'add_bootstrap3carouselslideplugin'),(202,'Can change bootstrap3 carousel slide plugin',66,'change_bootstrap3carouselslideplugin'),(203,'Can delete bootstrap3 carousel slide plugin',66,'delete_bootstrap3carouselslideplugin'),(204,'Can add bootstrap3 carousel slide folder plugin',67,'add_bootstrap3carouselslidefolderplugin'),(205,'Can change bootstrap3 carousel slide folder plugin',67,'change_bootstrap3carouselslidefolderplugin'),(206,'Can delete bootstrap3 carousel slide folder plugin',67,'delete_bootstrap3carouselslidefolderplugin'),(207,'Can add poll',68,'add_poll'),(208,'Can change poll',68,'change_poll'),(209,'Can delete poll',68,'delete_poll'),(210,'Can add choice',69,'add_choice'),(211,'Can change choice',69,'change_choice'),(212,'Can delete choice',69,'delete_choice'),(213,'Can add application',70,'add_application'),(214,'Can change application',70,'change_application'),(215,'Can delete application',70,'delete_application'),(216,'Can add grant',71,'add_grant'),(217,'Can change grant',71,'change_grant'),(218,'Can delete grant',71,'delete_grant'),(219,'Can add access token',72,'add_accesstoken'),(220,'Can change access token',72,'change_accesstoken'),(221,'Can delete access token',72,'delete_accesstoken'),(222,'Can add refresh token',73,'add_refreshtoken'),(223,'Can change refresh token',73,'change_refreshtoken'),(224,'Can delete refresh token',73,'delete_refreshtoken');
+INSERT INTO `auth_permission` VALUES (1,'Can use Structure mode',1,'use_structure'),(2,'Can change page',2,'change_page'),(3,'Can add permission',3,'add_permission'),(4,'Can change permission',3,'change_permission'),(5,'Can delete permission',3,'delete_permission'),(6,'Can add group',4,'add_group'),(7,'Can change group',4,'change_group'),(8,'Can delete group',4,'delete_group'),(9,'Can add user',5,'add_user'),(10,'Can change user',5,'change_user'),(11,'Can delete user',5,'delete_user'),(12,'Can add content type',6,'add_contenttype'),(13,'Can change content type',6,'change_contenttype'),(14,'Can delete content type',6,'delete_contenttype'),(15,'Can add session',7,'add_session'),(16,'Can change session',7,'change_session'),(17,'Can delete session',7,'delete_session'),(18,'Can add log entry',8,'add_logentry'),(19,'Can change log entry',8,'change_logentry'),(20,'Can delete log entry',8,'delete_logentry'),(21,'Can add site',9,'add_site'),(22,'Can change site',9,'change_site'),(23,'Can delete site',9,'delete_site'),(24,'Can add user setting',10,'add_usersettings'),(25,'Can change user setting',10,'change_usersettings'),(26,'Can delete user setting',10,'delete_usersettings'),(27,'Can add page',2,'add_page'),(28,'Can delete page',2,'delete_page'),(29,'Can view page',2,'view_page'),(30,'Can publish page',2,'publish_page'),(31,'Can edit static placeholders',2,'edit_static_placeholder'),(32,'Can add Page global permission',11,'add_globalpagepermission'),(33,'Can change Page global permission',11,'change_globalpagepermission'),(34,'Can delete Page global permission',11,'delete_globalpagepermission'),(35,'Can add Page permission',12,'add_pagepermission'),(36,'Can change Page permission',12,'change_pagepermission'),(37,'Can delete Page permission',12,'delete_pagepermission'),(38,'Can add User (page)',13,'add_pageuser'),(39,'Can change User (page)',13,'change_pageuser'),(40,'Can delete User (page)',13,'delete_pageuser'),(41,'Can add User group (page)',14,'add_pageusergroup'),(42,'Can change User group (page)',14,'change_pageusergroup'),(43,'Can delete User group (page)',14,'delete_pageusergroup'),(44,'Can add placeholder',1,'add_placeholder'),(45,'Can change placeholder',1,'change_placeholder'),(46,'Can delete placeholder',1,'delete_placeholder'),(47,'Can add cms plugin',15,'add_cmsplugin'),(48,'Can change cms plugin',15,'change_cmsplugin'),(49,'Can delete cms plugin',15,'delete_cmsplugin'),(50,'Can add title',16,'add_title'),(51,'Can change title',16,'change_title'),(52,'Can delete title',16,'delete_title'),(53,'Can add placeholder reference',17,'add_placeholderreference'),(54,'Can change placeholder reference',17,'change_placeholderreference'),(55,'Can delete placeholder reference',17,'delete_placeholderreference'),(56,'Can add static placeholder',18,'add_staticplaceholder'),(57,'Can change static placeholder',18,'change_staticplaceholder'),(58,'Can delete static placeholder',18,'delete_staticplaceholder'),(59,'Can add alias plugin model',19,'add_aliaspluginmodel'),(60,'Can change alias plugin model',19,'change_aliaspluginmodel'),(61,'Can delete alias plugin model',19,'delete_aliaspluginmodel'),(62,'Can add urlconf revision',20,'add_urlconfrevision'),(63,'Can change urlconf revision',20,'change_urlconfrevision'),(64,'Can delete urlconf revision',20,'delete_urlconfrevision'),(65,'Can add cache key',21,'add_cachekey'),(66,'Can change cache key',21,'change_cachekey'),(67,'Can delete cache key',21,'delete_cachekey'),(68,'Can add text',22,'add_text'),(69,'Can change text',22,'change_text'),(70,'Can delete text',22,'delete_text'),(71,'Can add Folder',23,'add_folder'),(72,'Can change Folder',23,'change_folder'),(73,'Can delete Folder',23,'delete_folder'),(74,'Can use directory listing',23,'can_use_directory_listing'),(75,'Can add folder permission',24,'add_folderpermission'),(76,'Can change folder permission',24,'change_folderpermission'),(77,'Can delete folder permission',24,'delete_folderpermission'),(78,'Can add file',25,'add_file'),(79,'Can change file',25,'change_file'),(80,'Can delete file',25,'delete_file'),(81,'Can add clipboard',26,'add_clipboard'),(82,'Can change clipboard',26,'change_clipboard'),(83,'Can delete clipboard',26,'delete_clipboard'),(84,'Can add clipboard item',27,'add_clipboarditem'),(85,'Can change clipboard item',27,'change_clipboarditem'),(86,'Can delete clipboard item',27,'delete_clipboarditem'),(87,'Can add image',28,'add_image'),(88,'Can change image',28,'change_image'),(89,'Can delete image',28,'delete_image'),(90,'Can add thumbnail option',29,'add_thumbnailoption'),(91,'Can change thumbnail option',29,'change_thumbnailoption'),(92,'Can delete thumbnail option',29,'delete_thumbnailoption'),(93,'Can add source',30,'add_source'),(94,'Can change source',30,'change_source'),(95,'Can delete source',30,'delete_source'),(96,'Can add thumbnail',31,'add_thumbnail'),(97,'Can change thumbnail',31,'change_thumbnail'),(98,'Can delete thumbnail',31,'delete_thumbnail'),(99,'Can add thumbnail dimensions',32,'add_thumbnaildimensions'),(100,'Can change thumbnail dimensions',32,'change_thumbnaildimensions'),(101,'Can delete thumbnail dimensions',32,'delete_thumbnaildimensions'),(102,'Can add multi columns',33,'add_multicolumns'),(103,'Can change multi columns',33,'change_multicolumns'),(104,'Can delete multi columns',33,'delete_multicolumns'),(105,'Can add column',34,'add_column'),(106,'Can change column',34,'change_column'),(107,'Can delete column',34,'delete_column'),(108,'Can add link',35,'add_link'),(109,'Can change link',35,'change_link'),(110,'Can delete link',35,'delete_link'),(111,'Can add filer file',36,'add_filerfile'),(112,'Can change filer file',36,'change_filerfile'),(113,'Can delete filer file',36,'delete_filerfile'),(114,'Can add filer folder',37,'add_filerfolder'),(115,'Can change filer folder',37,'change_filerfolder'),(116,'Can delete filer folder',37,'delete_filerfolder'),(117,'Can add filer image',38,'add_filerimage'),(118,'Can change filer image',38,'change_filerimage'),(119,'Can delete filer image',38,'delete_filerimage'),(120,'Can add Snippet',39,'add_snippet'),(121,'Can change Snippet',39,'change_snippet'),(122,'Can delete Snippet',39,'delete_snippet'),(123,'Can add Snippet',40,'add_snippetptr'),(124,'Can change Snippet',40,'change_snippetptr'),(125,'Can delete Snippet',40,'delete_snippetptr'),(126,'Can add google map',41,'add_googlemap'),(127,'Can change google map',41,'change_googlemap'),(128,'Can delete google map',41,'delete_googlemap'),(129,'Can add video player',42,'add_videoplayer'),(130,'Can change video player',42,'change_videoplayer'),(131,'Can delete video player',42,'delete_videoplayer'),(132,'Can add video source',43,'add_videosource'),(133,'Can change video source',43,'change_videosource'),(134,'Can delete video source',43,'delete_videosource'),(135,'Can add video track',44,'add_videotrack'),(136,'Can change video track',44,'change_videotrack'),(137,'Can delete video track',44,'delete_videotrack'),(138,'Can add style',45,'add_style'),(139,'Can change style',45,'change_style'),(140,'Can delete style',45,'delete_style'),(141,'Can add boostrap3 button plugin',46,'add_boostrap3buttonplugin'),(142,'Can change boostrap3 button plugin',46,'change_boostrap3buttonplugin'),(143,'Can delete boostrap3 button plugin',46,'delete_boostrap3buttonplugin'),(144,'Can add boostrap3 blockquote plugin',47,'add_boostrap3blockquoteplugin'),(145,'Can change boostrap3 blockquote plugin',47,'change_boostrap3blockquoteplugin'),(146,'Can delete boostrap3 blockquote plugin',47,'delete_boostrap3blockquoteplugin'),(147,'Can add boostrap3 icon plugin',48,'add_boostrap3iconplugin'),(148,'Can change boostrap3 icon plugin',48,'change_boostrap3iconplugin'),(149,'Can delete boostrap3 icon plugin',48,'delete_boostrap3iconplugin'),(150,'Can add boostrap3 label plugin',49,'add_boostrap3labelplugin'),(151,'Can change boostrap3 label plugin',49,'change_boostrap3labelplugin'),(152,'Can delete boostrap3 label plugin',49,'delete_boostrap3labelplugin'),(153,'Can add boostrap3 well plugin',50,'add_boostrap3wellplugin'),(154,'Can change boostrap3 well plugin',50,'change_boostrap3wellplugin'),(155,'Can delete boostrap3 well plugin',50,'delete_boostrap3wellplugin'),(156,'Can add boostrap3 alert plugin',51,'add_boostrap3alertplugin'),(157,'Can change boostrap3 alert plugin',51,'change_boostrap3alertplugin'),(158,'Can delete boostrap3 alert plugin',51,'delete_boostrap3alertplugin'),(159,'Can add boostrap3 image plugin',52,'add_boostrap3imageplugin'),(160,'Can change boostrap3 image plugin',52,'change_boostrap3imageplugin'),(161,'Can delete boostrap3 image plugin',52,'delete_boostrap3imageplugin'),(162,'Can add boostrap3 spacer plugin',53,'add_boostrap3spacerplugin'),(163,'Can change boostrap3 spacer plugin',53,'change_boostrap3spacerplugin'),(164,'Can delete boostrap3 spacer plugin',53,'delete_boostrap3spacerplugin'),(165,'Can add bootstrap3 file plugin',54,'add_bootstrap3fileplugin'),(166,'Can change bootstrap3 file plugin',54,'change_bootstrap3fileplugin'),(167,'Can delete bootstrap3 file plugin',54,'delete_bootstrap3fileplugin'),(168,'Can add boostrap3 panel plugin',55,'add_boostrap3panelplugin'),(169,'Can change boostrap3 panel plugin',55,'change_boostrap3panelplugin'),(170,'Can delete boostrap3 panel plugin',55,'delete_boostrap3panelplugin'),(171,'Can add boostrap3 panel heading plugin',56,'add_boostrap3panelheadingplugin'),(172,'Can change boostrap3 panel heading plugin',56,'change_boostrap3panelheadingplugin'),(173,'Can delete boostrap3 panel heading plugin',56,'delete_boostrap3panelheadingplugin'),(174,'Can add boostrap3 panel body plugin',57,'add_boostrap3panelbodyplugin'),(175,'Can change boostrap3 panel body plugin',57,'change_boostrap3panelbodyplugin'),(176,'Can delete boostrap3 panel body plugin',57,'delete_boostrap3panelbodyplugin'),(177,'Can add boostrap3 panel footer plugin',58,'add_boostrap3panelfooterplugin'),(178,'Can change boostrap3 panel footer plugin',58,'change_boostrap3panelfooterplugin'),(179,'Can delete boostrap3 panel footer plugin',58,'delete_boostrap3panelfooterplugin'),(180,'Can add bootstrap3 row plugin',59,'add_bootstrap3rowplugin'),(181,'Can change bootstrap3 row plugin',59,'change_bootstrap3rowplugin'),(182,'Can delete bootstrap3 row plugin',59,'delete_bootstrap3rowplugin'),(183,'Can add bootstrap3 column plugin',60,'add_bootstrap3columnplugin'),(184,'Can change bootstrap3 column plugin',60,'change_bootstrap3columnplugin'),(185,'Can delete bootstrap3 column plugin',60,'delete_bootstrap3columnplugin'),(186,'Can add bootstrap3 accordion plugin',61,'add_bootstrap3accordionplugin'),(187,'Can change bootstrap3 accordion plugin',61,'change_bootstrap3accordionplugin'),(188,'Can delete bootstrap3 accordion plugin',61,'delete_bootstrap3accordionplugin'),(189,'Can add bootstrap3 accordion item plugin',62,'add_bootstrap3accordionitemplugin'),(190,'Can change bootstrap3 accordion item plugin',62,'change_bootstrap3accordionitemplugin'),(191,'Can delete bootstrap3 accordion item plugin',62,'delete_bootstrap3accordionitemplugin'),(192,'Can add bootstrap3 list group plugin',63,'add_bootstrap3listgroupplugin'),(193,'Can change bootstrap3 list group plugin',63,'change_bootstrap3listgroupplugin'),(194,'Can delete bootstrap3 list group plugin',63,'delete_bootstrap3listgroupplugin'),(195,'Can add bootstrap3 list group item plugin',64,'add_bootstrap3listgroupitemplugin'),(196,'Can change bootstrap3 list group item plugin',64,'change_bootstrap3listgroupitemplugin'),(197,'Can delete bootstrap3 list group item plugin',64,'delete_bootstrap3listgroupitemplugin'),(198,'Can add bootstrap3 carousel plugin',65,'add_bootstrap3carouselplugin'),(199,'Can change bootstrap3 carousel plugin',65,'change_bootstrap3carouselplugin'),(200,'Can delete bootstrap3 carousel plugin',65,'delete_bootstrap3carouselplugin'),(201,'Can add bootstrap3 carousel slide plugin',66,'add_bootstrap3carouselslideplugin'),(202,'Can change bootstrap3 carousel slide plugin',66,'change_bootstrap3carouselslideplugin'),(203,'Can delete bootstrap3 carousel slide plugin',66,'delete_bootstrap3carouselslideplugin'),(204,'Can add bootstrap3 carousel slide folder plugin',67,'add_bootstrap3carouselslidefolderplugin'),(205,'Can change bootstrap3 carousel slide folder plugin',67,'change_bootstrap3carouselslidefolderplugin'),(206,'Can delete bootstrap3 carousel slide folder plugin',67,'delete_bootstrap3carouselslidefolderplugin'),(207,'Can add poll',68,'add_poll'),(208,'Can change poll',68,'change_poll'),(209,'Can delete poll',68,'delete_poll'),(210,'Can add choice',69,'add_choice'),(211,'Can change choice',69,'change_choice'),(212,'Can delete choice',69,'delete_choice'),(213,'Can add application',70,'add_application'),(214,'Can change application',70,'change_application'),(215,'Can delete application',70,'delete_application'),(216,'Can add grant',71,'add_grant'),(217,'Can change grant',71,'change_grant'),(218,'Can delete grant',71,'delete_grant'),(219,'Can add access token',72,'add_accesstoken'),(220,'Can change access token',72,'change_accesstoken'),(221,'Can delete access token',72,'delete_accesstoken'),(222,'Can add refresh token',73,'add_refreshtoken'),(223,'Can change refresh token',73,'change_refreshtoken'),(224,'Can delete refresh token',73,'delete_refreshtoken'),(225,'Can add menuportions',79,'add_menuportions'),(226,'Can change menuportions',79,'change_menuportions'),(227,'Can delete menuportions',79,'delete_menuportions'),(228,'Can add orders',81,'add_orders'),(229,'Can change orders',81,'change_orders'),(230,'Can delete orders',81,'delete_orders'),(231,'Can add business detail',78,'add_businessdetail'),(232,'Can change business detail',78,'change_businessdetail'),(233,'Can delete business detail',78,'delete_businessdetail'),(234,'Can add menu',74,'add_menu'),(235,'Can change menu',74,'change_menu'),(236,'Can delete menu',74,'delete_menu'),(237,'Can add menu items',76,'add_menuitems'),(238,'Can change menu items',76,'change_menuitems'),(239,'Can delete menu items',76,'delete_menuitems'),(240,'Can add order',75,'add_order'),(241,'Can change order',75,'change_order'),(242,'Can delete order',75,'delete_order'),(243,'Can add phrase to menuitems',77,'add_phrasetomenuitems'),(244,'Can change phrase to menuitems',77,'change_phrasetomenuitems'),(245,'Can delete phrase to menuitems',77,'delete_phrasetomenuitems'),(246,'Can add shopping cart',82,'add_shoppingcart'),(247,'Can change shopping cart',82,'change_shoppingcart'),(248,'Can delete shopping cart',82,'delete_shoppingcart'),(249,'Can add type to menuitems',80,'add_typetomenuitems'),(250,'Can change type to menuitems',80,'change_typetomenuitems'),(251,'Can delete type to menuitems',80,'delete_typetomenuitems');
 /*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -856,6 +920,33 @@ CREATE TABLE `auth_user_user_permissions` (
 LOCK TABLES `auth_user_user_permissions` WRITE;
 /*!40000 ALTER TABLE `auth_user_user_permissions` DISABLE KEYS */;
 /*!40000 ALTER TABLE `auth_user_user_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `business_detail`
+--
+
+DROP TABLE IF EXISTS `business_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `business_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `location` longtext,
+  `closed_days` longtext,
+  `insert_date` datetime(6) NOT NULL,
+  `update_date` datetime(6) DEFAULT NULL,
+  `current_location` longtext,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `business_detail`
+--
+
+LOCK TABLES `business_detail` WRITE;
+/*!40000 ALTER TABLE `business_detail` DISABLE KEYS */;
+/*!40000 ALTER TABLE `business_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1530,7 +1621,7 @@ CREATE TABLE `django_content_type` (
   `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_45f3b1d93ec8c61c_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1539,7 +1630,7 @@ CREATE TABLE `django_content_type` (
 
 LOCK TABLES `django_content_type` WRITE;
 /*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
-INSERT INTO `django_content_type` VALUES (8,'admin','logentry'),(51,'aldryn_bootstrap3','boostrap3alertplugin'),(47,'aldryn_bootstrap3','boostrap3blockquoteplugin'),(46,'aldryn_bootstrap3','boostrap3buttonplugin'),(48,'aldryn_bootstrap3','boostrap3iconplugin'),(52,'aldryn_bootstrap3','boostrap3imageplugin'),(49,'aldryn_bootstrap3','boostrap3labelplugin'),(57,'aldryn_bootstrap3','boostrap3panelbodyplugin'),(58,'aldryn_bootstrap3','boostrap3panelfooterplugin'),(56,'aldryn_bootstrap3','boostrap3panelheadingplugin'),(55,'aldryn_bootstrap3','boostrap3panelplugin'),(53,'aldryn_bootstrap3','boostrap3spacerplugin'),(50,'aldryn_bootstrap3','boostrap3wellplugin'),(62,'aldryn_bootstrap3','bootstrap3accordionitemplugin'),(61,'aldryn_bootstrap3','bootstrap3accordionplugin'),(65,'aldryn_bootstrap3','bootstrap3carouselplugin'),(67,'aldryn_bootstrap3','bootstrap3carouselslidefolderplugin'),(66,'aldryn_bootstrap3','bootstrap3carouselslideplugin'),(60,'aldryn_bootstrap3','bootstrap3columnplugin'),(54,'aldryn_bootstrap3','bootstrap3fileplugin'),(64,'aldryn_bootstrap3','bootstrap3listgroupitemplugin'),(63,'aldryn_bootstrap3','bootstrap3listgroupplugin'),(59,'aldryn_bootstrap3','bootstrap3rowplugin'),(45,'aldryn_style','style'),(4,'auth','group'),(3,'auth','permission'),(5,'auth','user'),(19,'cms','aliaspluginmodel'),(15,'cms','cmsplugin'),(11,'cms','globalpagepermission'),(2,'cms','page'),(12,'cms','pagepermission'),(13,'cms','pageuser'),(14,'cms','pageusergroup'),(1,'cms','placeholder'),(17,'cms','placeholderreference'),(18,'cms','staticplaceholder'),(16,'cms','title'),(20,'cms','urlconfrevision'),(10,'cms','usersettings'),(36,'cmsplugin_filer_file','filerfile'),(37,'cmsplugin_filer_folder','filerfolder'),(38,'cmsplugin_filer_image','filerimage'),(6,'contenttypes','contenttype'),(34,'djangocms_column','column'),(33,'djangocms_column','multicolumns'),(41,'djangocms_googlemap','googlemap'),(35,'djangocms_link','link'),(39,'djangocms_snippet','snippet'),(40,'djangocms_snippet','snippetptr'),(22,'djangocms_text_ckeditor','text'),(42,'djangocms_video','videoplayer'),(43,'djangocms_video','videosource'),(44,'djangocms_video','videotrack'),(30,'easy_thumbnails','source'),(31,'easy_thumbnails','thumbnail'),(32,'easy_thumbnails','thumbnaildimensions'),(26,'filer','clipboard'),(27,'filer','clipboarditem'),(25,'filer','file'),(23,'filer','folder'),(24,'filer','folderpermission'),(28,'filer','image'),(29,'filer','thumbnailoption'),(21,'menus','cachekey'),(72,'oauth2_provider','accesstoken'),(70,'oauth2_provider','application'),(71,'oauth2_provider','grant'),(73,'oauth2_provider','refreshtoken'),(69,'polls','choice'),(68,'polls','poll'),(78,'product','businessdetail'),(74,'product','menu'),(76,'product','menuitems'),(79,'product','menuportions'),(75,'product','order'),(81,'product','orders'),(77,'product','phrasetomenuitems'),(80,'product','typetomenuitems'),(7,'sessions','session'),(9,'sites','site');
+INSERT INTO `django_content_type` VALUES (8,'admin','logentry'),(51,'aldryn_bootstrap3','boostrap3alertplugin'),(47,'aldryn_bootstrap3','boostrap3blockquoteplugin'),(46,'aldryn_bootstrap3','boostrap3buttonplugin'),(48,'aldryn_bootstrap3','boostrap3iconplugin'),(52,'aldryn_bootstrap3','boostrap3imageplugin'),(49,'aldryn_bootstrap3','boostrap3labelplugin'),(57,'aldryn_bootstrap3','boostrap3panelbodyplugin'),(58,'aldryn_bootstrap3','boostrap3panelfooterplugin'),(56,'aldryn_bootstrap3','boostrap3panelheadingplugin'),(55,'aldryn_bootstrap3','boostrap3panelplugin'),(53,'aldryn_bootstrap3','boostrap3spacerplugin'),(50,'aldryn_bootstrap3','boostrap3wellplugin'),(62,'aldryn_bootstrap3','bootstrap3accordionitemplugin'),(61,'aldryn_bootstrap3','bootstrap3accordionplugin'),(65,'aldryn_bootstrap3','bootstrap3carouselplugin'),(67,'aldryn_bootstrap3','bootstrap3carouselslidefolderplugin'),(66,'aldryn_bootstrap3','bootstrap3carouselslideplugin'),(60,'aldryn_bootstrap3','bootstrap3columnplugin'),(54,'aldryn_bootstrap3','bootstrap3fileplugin'),(64,'aldryn_bootstrap3','bootstrap3listgroupitemplugin'),(63,'aldryn_bootstrap3','bootstrap3listgroupplugin'),(59,'aldryn_bootstrap3','bootstrap3rowplugin'),(45,'aldryn_style','style'),(4,'auth','group'),(3,'auth','permission'),(5,'auth','user'),(19,'cms','aliaspluginmodel'),(15,'cms','cmsplugin'),(11,'cms','globalpagepermission'),(2,'cms','page'),(12,'cms','pagepermission'),(13,'cms','pageuser'),(14,'cms','pageusergroup'),(1,'cms','placeholder'),(17,'cms','placeholderreference'),(18,'cms','staticplaceholder'),(16,'cms','title'),(20,'cms','urlconfrevision'),(10,'cms','usersettings'),(36,'cmsplugin_filer_file','filerfile'),(37,'cmsplugin_filer_folder','filerfolder'),(38,'cmsplugin_filer_image','filerimage'),(6,'contenttypes','contenttype'),(34,'djangocms_column','column'),(33,'djangocms_column','multicolumns'),(41,'djangocms_googlemap','googlemap'),(35,'djangocms_link','link'),(39,'djangocms_snippet','snippet'),(40,'djangocms_snippet','snippetptr'),(22,'djangocms_text_ckeditor','text'),(42,'djangocms_video','videoplayer'),(43,'djangocms_video','videosource'),(44,'djangocms_video','videotrack'),(30,'easy_thumbnails','source'),(31,'easy_thumbnails','thumbnail'),(32,'easy_thumbnails','thumbnaildimensions'),(26,'filer','clipboard'),(27,'filer','clipboarditem'),(25,'filer','file'),(23,'filer','folder'),(24,'filer','folderpermission'),(28,'filer','image'),(29,'filer','thumbnailoption'),(21,'menus','cachekey'),(72,'oauth2_provider','accesstoken'),(70,'oauth2_provider','application'),(71,'oauth2_provider','grant'),(73,'oauth2_provider','refreshtoken'),(69,'polls','choice'),(68,'polls','poll'),(78,'product','businessdetail'),(74,'product','menu'),(76,'product','menuitems'),(79,'product','menuportions'),(75,'product','order'),(81,'product','orders'),(77,'product','phrasetomenuitems'),(82,'product','shoppingcart'),(80,'product','typetomenuitems'),(7,'sessions','session'),(9,'sites','site');
 /*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1556,7 +1647,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1565,7 +1656,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2016-11-15 01:18:27.920965'),(2,'auth','0001_initial','2016-11-15 01:18:28.405903'),(3,'admin','0001_initial','2016-11-15 01:18:28.506143'),(4,'filer','0001_initial','2016-11-15 01:18:29.326734'),(5,'filer','0002_auto_20150606_2003','2016-11-15 01:18:29.383511'),(6,'contenttypes','0002_remove_content_type_name','2016-11-15 01:18:29.536984'),(7,'sites','0001_initial','2016-11-15 01:18:29.554994'),(8,'cms','0001_initial','2016-11-15 01:18:30.277043'),(9,'cms','0002_auto_20140816_1918','2016-11-15 01:18:32.111345'),(10,'cms','0003_auto_20140926_2347','2016-11-15 01:18:32.209796'),(11,'cms','0004_auto_20140924_1038','2016-11-15 01:18:33.415907'),(12,'cms','0005_auto_20140924_1039','2016-11-15 01:18:33.428549'),(13,'cms','0006_auto_20140924_1110','2016-11-15 01:18:34.400903'),(14,'cms','0007_auto_20141028_1559','2016-11-15 01:18:34.490063'),(15,'cms','0008_auto_20150208_2149','2016-11-15 01:18:34.575959'),(16,'cms','0008_auto_20150121_0059','2016-11-15 01:18:34.675785'),(17,'cms','0009_merge','2016-11-15 01:18:34.678273'),(18,'cms','0010_migrate_use_structure','2016-11-15 01:18:34.780665'),(19,'cms','0011_auto_20150419_1006','2016-11-15 01:18:34.980357'),(20,'aldryn_bootstrap3','0001_initial','2016-11-15 01:18:38.334589'),(21,'aldryn_bootstrap3','0002_bootstrap3fileplugin','2016-11-15 01:18:38.534527'),(22,'aldryn_bootstrap3','0003_auto_20151113_1604','2016-11-15 01:18:39.640247'),(23,'aldryn_bootstrap3','0004_auto_20151211_1333','2016-11-15 01:18:40.472059'),(24,'aldryn_bootstrap3','0005_boostrap3imageplugin_use_original_image','2016-11-15 01:18:40.634952'),(25,'aldryn_bootstrap3','0006_auto_20160615_1740','2016-11-15 01:18:40.921049'),(26,'aldryn_bootstrap3','0007_auto_20160705_1155','2016-11-15 01:18:41.178072'),(27,'aldryn_bootstrap3','0008_auto_20160820_2332','2016-11-15 01:18:43.137632'),(28,'aldryn_style','0001_initial','2016-11-15 01:18:43.298544'),(29,'aldryn_style','0002_auto_20150622_1606','2016-11-15 01:18:43.461564'),(30,'aldryn_style','0003_auto_20161113_2018','2016-11-15 01:18:43.713511'),(31,'auth','0002_alter_permission_name_max_length','2016-11-15 01:18:43.885196'),(32,'auth','0003_alter_user_email_max_length','2016-11-15 01:18:44.045811'),(33,'auth','0004_alter_user_username_opts','2016-11-15 01:18:44.194578'),(34,'auth','0005_alter_user_last_login_null','2016-11-15 01:18:44.368526'),(35,'auth','0006_require_contenttypes_0002','2016-11-15 01:18:44.371948'),(36,'cms','0012_auto_20150607_2207','2016-11-15 01:18:44.716497'),(37,'cms','0013_urlconfrevision','2016-11-15 01:18:44.742767'),(38,'cms','0014_auto_20160404_1908','2016-11-15 01:18:44.767419'),(39,'cms','0015_auto_20160421_0000','2016-11-15 01:18:44.971949'),(40,'cms','0016_auto_20160608_1535','2016-11-15 01:18:45.300232'),(41,'cmsplugin_filer_file','0001_initial','2016-11-15 01:18:45.493550'),(42,'cmsplugin_filer_file','0002_auto_20160112_1617','2016-11-15 01:18:45.684857'),(43,'cmsplugin_filer_file','0003_filerfile_link_attributes','2016-11-15 01:18:45.851081'),(44,'cmsplugin_filer_file','0004_auto_20160705_1334','2016-11-15 01:18:45.996370'),(45,'cmsplugin_filer_file','0005_auto_20160713_1853','2016-11-15 01:18:46.216706'),(46,'cmsplugin_filer_folder','0001_initial','2016-11-15 01:18:46.419700'),(47,'cmsplugin_filer_folder','0002_auto_20160113_1318','2016-11-15 01:18:46.621761'),(48,'cmsplugin_filer_folder','0003_auto_20160713_1853','2016-11-15 01:18:46.803338'),(49,'filer','0003_thumbnailoption','2016-11-15 01:18:46.836186'),(50,'cmsplugin_filer_image','0001_initial','2016-11-15 01:18:47.341336'),(51,'cmsplugin_filer_image','0002_auto_20160108_1708','2016-11-15 01:18:48.302626'),(52,'cmsplugin_filer_image','0003_mv_thumbnail_option_to_filer_20160119_1720','2016-11-15 01:18:48.318615'),(53,'cmsplugin_filer_image','0004_auto_20160120_0950','2016-11-15 01:18:48.516983'),(54,'cmsplugin_filer_image','0005_auto_20160224_1457','2016-11-15 01:18:48.689763'),(55,'cmsplugin_filer_image','0006_auto_20160427_1438','2016-11-15 01:18:48.838171'),(56,'cmsplugin_filer_image','0007_filerimage_link_attributes','2016-11-15 01:18:49.026124'),(57,'cmsplugin_filer_image','0008_auto_20160705_1334','2016-11-15 01:18:49.195646'),(58,'cmsplugin_filer_image','0009_auto_20160713_1853','2016-11-15 01:18:49.423080'),(59,'djangocms_column','0001_initial','2016-11-15 01:18:49.778958'),(60,'djangocms_column','0002_auto_20160915_0818','2016-11-15 01:18:50.141267'),(61,'djangocms_googlemap','0001_initial','2016-11-15 01:18:50.352706'),(62,'djangocms_googlemap','0002_auto_20160622_1031','2016-11-15 01:18:50.994548'),(63,'djangocms_googlemap','0003_auto_20160825_1829','2016-11-15 01:18:51.187123'),(64,'djangocms_link','0001_initial','2016-11-15 01:18:51.413541'),(65,'djangocms_link','0002_auto_20140929_1705','2016-11-15 01:18:51.579061'),(66,'djangocms_link','0003_auto_20150212_1310','2016-11-15 01:18:51.753502'),(67,'djangocms_link','0004_auto_20150708_1133','2016-11-15 01:18:52.094209'),(68,'djangocms_link','0005_auto_20151003_1710','2016-11-15 01:18:52.291057'),(69,'djangocms_link','0006_remove_related_name_for_cmsplugin_ptr','2016-11-15 01:18:53.089101'),(70,'djangocms_link','0007_set_related_name_for_cmsplugin_ptr','2016-11-15 01:18:53.284563'),(71,'djangocms_link','0008_link_attributes','2016-11-15 01:18:53.485334'),(72,'djangocms_link','0009_auto_20160705_1344','2016-11-15 01:18:53.653889'),(73,'djangocms_link','0010_adapted_fields','2016-11-15 01:18:55.032157'),(74,'djangocms_link','0011_fixed_null_values','2016-11-15 01:18:55.048031'),(75,'djangocms_link','0012_removed_null','2016-11-15 01:18:55.683461'),(76,'djangocms_snippet','0001_initial','2016-11-15 01:18:55.939568'),(77,'djangocms_snippet','0002_snippet_slug','2016-11-15 01:18:56.166225'),(78,'djangocms_snippet','0003_auto_data_fill_slug','2016-11-15 01:18:56.182066'),(79,'djangocms_snippet','0004_auto_alter_slug_unique','2016-11-15 01:18:56.393013'),(80,'djangocms_snippet','0005_set_related_name_for_cmsplugin_ptr','2016-11-15 01:18:56.594292'),(81,'djangocms_snippet','0006_auto_20160831_0729','2016-11-15 01:18:57.246964'),(82,'djangocms_snippet','0007_auto_alter_template_helptext','2016-11-15 01:18:58.001045'),(83,'djangocms_text_ckeditor','0001_initial','2016-11-15 01:18:58.193498'),(84,'djangocms_text_ckeditor','0002_remove_related_name_for_cmsplugin_ptr','2016-11-15 01:18:58.432477'),(85,'djangocms_text_ckeditor','0003_set_related_name_for_cmsplugin_ptr','2016-11-15 01:18:58.626983'),(86,'djangocms_text_ckeditor','0004_auto_20160706_1339','2016-11-15 01:18:58.643634'),(87,'filer','0004_auto_20160328_1434','2016-11-15 01:18:58.857118'),(88,'filer','0005_auto_20160623_1425','2016-11-15 01:18:59.443418'),(89,'filer','0006_auto_20160623_1627','2016-11-15 01:18:59.644528'),(90,'djangocms_video','0001_initial','2016-11-15 01:18:59.860823'),(91,'djangocms_video','0002_set_related_name_for_cmsplugin_ptr','2016-11-15 01:19:00.072751'),(92,'djangocms_video','0003_field_adaptions','2016-11-15 01:19:01.044594'),(93,'djangocms_video','0004_move_to_attributes','2016-11-15 01:19:04.134379'),(94,'djangocms_video','0005_migrate_to_filer','2016-11-15 01:19:04.150591'),(95,'djangocms_video','0006_field_adaptions','2016-11-15 01:19:05.158747'),(96,'djangocms_video','0007_create_nested_plugin','2016-11-15 01:19:05.376929'),(97,'djangocms_video','0008_reset_null_values','2016-11-15 01:19:05.395135'),(98,'djangocms_video','0009_removed_null_values','2016-11-15 01:19:05.606410'),(99,'easy_thumbnails','0001_initial','2016-11-15 01:19:05.787028'),(100,'easy_thumbnails','0002_thumbnaildimensions','2016-11-15 01:19:05.842068'),(101,'menus','0001_initial','2016-11-15 01:19:05.883836'),(102,'polls','0001_initial','2016-11-15 01:19:06.022873'),(103,'sessions','0001_initial','2016-11-15 01:19:06.070787'),(104,'oauth2_provider','0001_initial','2016-11-17 20:53:41.532620'),(105,'oauth2_provider','0002_08_updates','2016-11-17 20:53:42.281429');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2016-11-15 01:18:27.920965'),(2,'auth','0001_initial','2016-11-15 01:18:28.405903'),(3,'admin','0001_initial','2016-11-15 01:18:28.506143'),(4,'filer','0001_initial','2016-11-15 01:18:29.326734'),(5,'filer','0002_auto_20150606_2003','2016-11-15 01:18:29.383511'),(6,'contenttypes','0002_remove_content_type_name','2016-11-15 01:18:29.536984'),(7,'sites','0001_initial','2016-11-15 01:18:29.554994'),(8,'cms','0001_initial','2016-11-15 01:18:30.277043'),(9,'cms','0002_auto_20140816_1918','2016-11-15 01:18:32.111345'),(10,'cms','0003_auto_20140926_2347','2016-11-15 01:18:32.209796'),(11,'cms','0004_auto_20140924_1038','2016-11-15 01:18:33.415907'),(12,'cms','0005_auto_20140924_1039','2016-11-15 01:18:33.428549'),(13,'cms','0006_auto_20140924_1110','2016-11-15 01:18:34.400903'),(14,'cms','0007_auto_20141028_1559','2016-11-15 01:18:34.490063'),(15,'cms','0008_auto_20150208_2149','2016-11-15 01:18:34.575959'),(16,'cms','0008_auto_20150121_0059','2016-11-15 01:18:34.675785'),(17,'cms','0009_merge','2016-11-15 01:18:34.678273'),(18,'cms','0010_migrate_use_structure','2016-11-15 01:18:34.780665'),(19,'cms','0011_auto_20150419_1006','2016-11-15 01:18:34.980357'),(20,'aldryn_bootstrap3','0001_initial','2016-11-15 01:18:38.334589'),(21,'aldryn_bootstrap3','0002_bootstrap3fileplugin','2016-11-15 01:18:38.534527'),(22,'aldryn_bootstrap3','0003_auto_20151113_1604','2016-11-15 01:18:39.640247'),(23,'aldryn_bootstrap3','0004_auto_20151211_1333','2016-11-15 01:18:40.472059'),(24,'aldryn_bootstrap3','0005_boostrap3imageplugin_use_original_image','2016-11-15 01:18:40.634952'),(25,'aldryn_bootstrap3','0006_auto_20160615_1740','2016-11-15 01:18:40.921049'),(26,'aldryn_bootstrap3','0007_auto_20160705_1155','2016-11-15 01:18:41.178072'),(27,'aldryn_bootstrap3','0008_auto_20160820_2332','2016-11-15 01:18:43.137632'),(28,'aldryn_style','0001_initial','2016-11-15 01:18:43.298544'),(29,'aldryn_style','0002_auto_20150622_1606','2016-11-15 01:18:43.461564'),(30,'aldryn_style','0003_auto_20161113_2018','2016-11-15 01:18:43.713511'),(31,'auth','0002_alter_permission_name_max_length','2016-11-15 01:18:43.885196'),(32,'auth','0003_alter_user_email_max_length','2016-11-15 01:18:44.045811'),(33,'auth','0004_alter_user_username_opts','2016-11-15 01:18:44.194578'),(34,'auth','0005_alter_user_last_login_null','2016-11-15 01:18:44.368526'),(35,'auth','0006_require_contenttypes_0002','2016-11-15 01:18:44.371948'),(36,'cms','0012_auto_20150607_2207','2016-11-15 01:18:44.716497'),(37,'cms','0013_urlconfrevision','2016-11-15 01:18:44.742767'),(38,'cms','0014_auto_20160404_1908','2016-11-15 01:18:44.767419'),(39,'cms','0015_auto_20160421_0000','2016-11-15 01:18:44.971949'),(40,'cms','0016_auto_20160608_1535','2016-11-15 01:18:45.300232'),(41,'cmsplugin_filer_file','0001_initial','2016-11-15 01:18:45.493550'),(42,'cmsplugin_filer_file','0002_auto_20160112_1617','2016-11-15 01:18:45.684857'),(43,'cmsplugin_filer_file','0003_filerfile_link_attributes','2016-11-15 01:18:45.851081'),(44,'cmsplugin_filer_file','0004_auto_20160705_1334','2016-11-15 01:18:45.996370'),(45,'cmsplugin_filer_file','0005_auto_20160713_1853','2016-11-15 01:18:46.216706'),(46,'cmsplugin_filer_folder','0001_initial','2016-11-15 01:18:46.419700'),(47,'cmsplugin_filer_folder','0002_auto_20160113_1318','2016-11-15 01:18:46.621761'),(48,'cmsplugin_filer_folder','0003_auto_20160713_1853','2016-11-15 01:18:46.803338'),(49,'filer','0003_thumbnailoption','2016-11-15 01:18:46.836186'),(50,'cmsplugin_filer_image','0001_initial','2016-11-15 01:18:47.341336'),(51,'cmsplugin_filer_image','0002_auto_20160108_1708','2016-11-15 01:18:48.302626'),(52,'cmsplugin_filer_image','0003_mv_thumbnail_option_to_filer_20160119_1720','2016-11-15 01:18:48.318615'),(53,'cmsplugin_filer_image','0004_auto_20160120_0950','2016-11-15 01:18:48.516983'),(54,'cmsplugin_filer_image','0005_auto_20160224_1457','2016-11-15 01:18:48.689763'),(55,'cmsplugin_filer_image','0006_auto_20160427_1438','2016-11-15 01:18:48.838171'),(56,'cmsplugin_filer_image','0007_filerimage_link_attributes','2016-11-15 01:18:49.026124'),(57,'cmsplugin_filer_image','0008_auto_20160705_1334','2016-11-15 01:18:49.195646'),(58,'cmsplugin_filer_image','0009_auto_20160713_1853','2016-11-15 01:18:49.423080'),(59,'djangocms_column','0001_initial','2016-11-15 01:18:49.778958'),(60,'djangocms_column','0002_auto_20160915_0818','2016-11-15 01:18:50.141267'),(61,'djangocms_googlemap','0001_initial','2016-11-15 01:18:50.352706'),(62,'djangocms_googlemap','0002_auto_20160622_1031','2016-11-15 01:18:50.994548'),(63,'djangocms_googlemap','0003_auto_20160825_1829','2016-11-15 01:18:51.187123'),(64,'djangocms_link','0001_initial','2016-11-15 01:18:51.413541'),(65,'djangocms_link','0002_auto_20140929_1705','2016-11-15 01:18:51.579061'),(66,'djangocms_link','0003_auto_20150212_1310','2016-11-15 01:18:51.753502'),(67,'djangocms_link','0004_auto_20150708_1133','2016-11-15 01:18:52.094209'),(68,'djangocms_link','0005_auto_20151003_1710','2016-11-15 01:18:52.291057'),(69,'djangocms_link','0006_remove_related_name_for_cmsplugin_ptr','2016-11-15 01:18:53.089101'),(70,'djangocms_link','0007_set_related_name_for_cmsplugin_ptr','2016-11-15 01:18:53.284563'),(71,'djangocms_link','0008_link_attributes','2016-11-15 01:18:53.485334'),(72,'djangocms_link','0009_auto_20160705_1344','2016-11-15 01:18:53.653889'),(73,'djangocms_link','0010_adapted_fields','2016-11-15 01:18:55.032157'),(74,'djangocms_link','0011_fixed_null_values','2016-11-15 01:18:55.048031'),(75,'djangocms_link','0012_removed_null','2016-11-15 01:18:55.683461'),(76,'djangocms_snippet','0001_initial','2016-11-15 01:18:55.939568'),(77,'djangocms_snippet','0002_snippet_slug','2016-11-15 01:18:56.166225'),(78,'djangocms_snippet','0003_auto_data_fill_slug','2016-11-15 01:18:56.182066'),(79,'djangocms_snippet','0004_auto_alter_slug_unique','2016-11-15 01:18:56.393013'),(80,'djangocms_snippet','0005_set_related_name_for_cmsplugin_ptr','2016-11-15 01:18:56.594292'),(81,'djangocms_snippet','0006_auto_20160831_0729','2016-11-15 01:18:57.246964'),(82,'djangocms_snippet','0007_auto_alter_template_helptext','2016-11-15 01:18:58.001045'),(83,'djangocms_text_ckeditor','0001_initial','2016-11-15 01:18:58.193498'),(84,'djangocms_text_ckeditor','0002_remove_related_name_for_cmsplugin_ptr','2016-11-15 01:18:58.432477'),(85,'djangocms_text_ckeditor','0003_set_related_name_for_cmsplugin_ptr','2016-11-15 01:18:58.626983'),(86,'djangocms_text_ckeditor','0004_auto_20160706_1339','2016-11-15 01:18:58.643634'),(87,'filer','0004_auto_20160328_1434','2016-11-15 01:18:58.857118'),(88,'filer','0005_auto_20160623_1425','2016-11-15 01:18:59.443418'),(89,'filer','0006_auto_20160623_1627','2016-11-15 01:18:59.644528'),(90,'djangocms_video','0001_initial','2016-11-15 01:18:59.860823'),(91,'djangocms_video','0002_set_related_name_for_cmsplugin_ptr','2016-11-15 01:19:00.072751'),(92,'djangocms_video','0003_field_adaptions','2016-11-15 01:19:01.044594'),(93,'djangocms_video','0004_move_to_attributes','2016-11-15 01:19:04.134379'),(94,'djangocms_video','0005_migrate_to_filer','2016-11-15 01:19:04.150591'),(95,'djangocms_video','0006_field_adaptions','2016-11-15 01:19:05.158747'),(96,'djangocms_video','0007_create_nested_plugin','2016-11-15 01:19:05.376929'),(97,'djangocms_video','0008_reset_null_values','2016-11-15 01:19:05.395135'),(98,'djangocms_video','0009_removed_null_values','2016-11-15 01:19:05.606410'),(99,'easy_thumbnails','0001_initial','2016-11-15 01:19:05.787028'),(100,'easy_thumbnails','0002_thumbnaildimensions','2016-11-15 01:19:05.842068'),(101,'menus','0001_initial','2016-11-15 01:19:05.883836'),(102,'polls','0001_initial','2016-11-15 01:19:06.022873'),(103,'sessions','0001_initial','2016-11-15 01:19:06.070787'),(104,'oauth2_provider','0001_initial','2016-11-17 20:53:41.532620'),(105,'oauth2_provider','0002_08_updates','2016-11-17 20:53:42.281429'),(106,'product','0001_initial','2017-02-19 21:23:56.679425');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2238,6 +2329,73 @@ LOCK TABLES `filer_thumbnailoption` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `menu`
+--
+
+DROP TABLE IF EXISTS `menu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `insert_date` datetime(6) NOT NULL,
+  `update_date` datetime(6) DEFAULT NULL,
+  `short_description` varchar(255) DEFAULT NULL,
+  `long_description` longtext,
+  `name` varchar(45) NOT NULL,
+  `normalized_name` varchar(45) DEFAULT NULL,
+  `available` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  UNIQUE KEY `normalized_name` (`normalized_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `menu`
+--
+
+LOCK TABLES `menu` WRITE;
+/*!40000 ALTER TABLE `menu` DISABLE KEYS */;
+/*!40000 ALTER TABLE `menu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `menu_items`
+--
+
+DROP TABLE IF EXISTS `menu_items`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `menu_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `insert_date` datetime(6) NOT NULL,
+  `update_date` datetime(6) DEFAULT NULL,
+  `portion_size` varchar(45) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `price` decimal(5,2) NOT NULL,
+  `available` tinyint(1) NOT NULL,
+  `photo_url` varchar(255) DEFAULT NULL,
+  `article_url` varchar(255) DEFAULT NULL,
+  `vegetarian` tinyint(1) NOT NULL,
+  `normalized_name` varchar(45) NOT NULL,
+  `menu_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `normalized_name` (`normalized_name`),
+  KEY `menu_items_menu_id_2b9f0582f61c4be5_fk_menu_id` (`menu_id`),
+  CONSTRAINT `menu_items_menu_id_2b9f0582f61c4be5_fk_menu_id` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `menu_items`
+--
+
+LOCK TABLES `menu_items` WRITE;
+/*!40000 ALTER TABLE `menu_items` DISABLE KEYS */;
+/*!40000 ALTER TABLE `menu_items` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `menus_cachekey`
 --
 
@@ -2250,7 +2408,7 @@ CREATE TABLE `menus_cachekey` (
   `site` int(10) unsigned NOT NULL,
   `key` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=174 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=175 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2259,7 +2417,7 @@ CREATE TABLE `menus_cachekey` (
 
 LOCK TABLES `menus_cachekey` WRITE;
 /*!40000 ALTER TABLE `menus_cachekey` DISABLE KEYS */;
-INSERT INTO `menus_cachekey` VALUES (173,'en',1,'menu_cache_menu_nodes_en_1_1_user');
+INSERT INTO `menus_cachekey` VALUES (173,'en',1,'menu_cache_menu_nodes_en_1_1_user'),(174,'en',1,'menu_cache_menu_nodes_en_1');
 /*!40000 ALTER TABLE `menus_cachekey` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2396,6 +2554,69 @@ LOCK TABLES `oauth2_provider_refreshtoken` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `order`
+--
+
+DROP TABLE IF EXISTS `order`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `insert_date` datetime(6) NOT NULL,
+  `update_date` datetime(6) DEFAULT NULL,
+  `order` longtext NOT NULL,
+  `total_order_price` decimal(9,2) NOT NULL,
+  `sales_tax` decimal(9,2) NOT NULL,
+  `fulfilled` tinyint(1) NOT NULL,
+  `delivery_charge` decimal(5,2) NOT NULL,
+  `customer` varchar(255) DEFAULT NULL,
+  `orderID` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `orderID` (`orderID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order`
+--
+
+LOCK TABLES `order` WRITE;
+/*!40000 ALTER TABLE `order` DISABLE KEYS */;
+/*!40000 ALTER TABLE `order` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `phrase_to_menuitems`
+--
+
+DROP TABLE IF EXISTS `phrase_to_menuitems`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `phrase_to_menuitems` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `insert_date` datetime(6) NOT NULL,
+  `update_date` datetime(6) DEFAULT NULL,
+  `long_phrase` varchar(255) NOT NULL,
+  `normalized` varchar(255) DEFAULT NULL,
+  `menuitem_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `long_phrase` (`long_phrase`),
+  UNIQUE KEY `normalized` (`normalized`),
+  KEY `phrase_to_menuitem_menuitem_id_16e5cc58464ae4ea_fk_menu_items_id` (`menuitem_id`),
+  CONSTRAINT `phrase_to_menuitem_menuitem_id_16e5cc58464ae4ea_fk_menu_items_id` FOREIGN KEY (`menuitem_id`) REFERENCES `menu_items` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `phrase_to_menuitems`
+--
+
+LOCK TABLES `phrase_to_menuitems` WRITE;
+/*!40000 ALTER TABLE `phrase_to_menuitems` DISABLE KEYS */;
+/*!40000 ALTER TABLE `phrase_to_menuitems` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `polls_choice`
 --
 
@@ -2444,6 +2665,35 @@ LOCK TABLES `polls_poll` WRITE;
 /*!40000 ALTER TABLE `polls_poll` DISABLE KEYS */;
 /*!40000 ALTER TABLE `polls_poll` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `type_to_menuitems`
+--
+
+DROP TABLE IF EXISTS `type_to_menuitems`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `type_to_menuitems` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `insert_date` datetime(6) NOT NULL,
+  `update_date` datetime(6) DEFAULT NULL,
+  `type` varchar(45) NOT NULL,
+  `menuitem_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `type_to_menuitems_type_56632c5926bbd788_uniq` (`type`,`menuitem_id`),
+  KEY `type_to_menuitems_menuitem_id_6a3baff7c9f10f41_fk_menu_items_id` (`menuitem_id`),
+  CONSTRAINT `type_to_menuitems_menuitem_id_6a3baff7c9f10f41_fk_menu_items_id` FOREIGN KEY (`menuitem_id`) REFERENCES `menu_items` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `type_to_menuitems`
+--
+
+LOCK TABLES `type_to_menuitems` WRITE;
+/*!40000 ALTER TABLE `type_to_menuitems` DISABLE KEYS */;
+/*!40000 ALTER TABLE `type_to_menuitems` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -2454,4 +2704,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-02 11:48:22
+-- Dump completed on 2017-02-19 18:23:17
