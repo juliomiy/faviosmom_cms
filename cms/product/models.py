@@ -25,7 +25,7 @@ class BaseProductTable(models.Model):
         return re.sub(r'[^a-zA-Z]', '', string.lower())
 
 class Menuportions(BaseProductTable):
-    menu = models.ForeignKey('Menu')
+    menu = models.ForeignKey('Menu', on_delete=models.PROTECT)
     name = models.CharField(unique=True, max_length=255)
     unit_price = models.DecimalField(max_digits=10, decimal_places=2)
     available = models.BooleanField(default=False)
@@ -106,7 +106,7 @@ class Menu(BaseProductTable):
 
 
 class MenuItems(BaseProductTable):
-    menu = models.ForeignKey(Menu)
+    menu = models.ForeignKey(Menu, on_delete=models.PROTECT)
     portion_size = models.CharField(max_length=45)
     name = models.CharField(unique=True, max_length=45)
     price = models.DecimalField(max_digits=5, decimal_places=2)
@@ -149,11 +149,14 @@ class Order(BaseProductTable):
 
     def __str__(self):
         return self.order
-
+#
+# equivalent to synonyms of how a menu item is referred to
+# used for Amazon Alexa App purposes
+#
 class PhraseToMenuitems(BaseProductTable):
     long_phrase = models.CharField(unique=True, max_length=255)
     normalized = models.CharField(unique=True, max_length=255, blank=True, null=True)
-    menuitem = models.ForeignKey(MenuItems)
+    menuitem = models.ForeignKey(MenuItems, on_delete=models.PROTECT)
 
     class Meta:
         managed = True
@@ -170,7 +173,7 @@ class PhraseToMenuitems(BaseProductTable):
 
 class TypeToMenuitems(BaseProductTable):
     type = models.CharField(max_length=45)
-    menuitem = models.ForeignKey(MenuItems)
+    menuitem = models.ForeignKey(MenuItems,on_delete=models.PROTECT)
 
     def save(self, *args, **kwargs):
         if self.pk is not None:
