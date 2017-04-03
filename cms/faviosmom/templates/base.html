@@ -21,6 +21,7 @@
     <!-- Bootstrap Core CSS -->
     <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
     <link href="{% static "css/bootstrap-social.css" %}" rel="stylesheet">
+    <link href="{% static "css/footer.css" %}" rel="stylesheet">
 
 
     <!-- Custom CSS -->
@@ -74,11 +75,7 @@
 
     <div class="container">
         <!-- Footer -->
-        <footer>
-           {% static_placeholder 'social_shares' %}
-           {% static_placeholder 'footer' %}
-
-        </footer>
+        {% include "footer.html" %}
 
     </div>
     <!-- /.container -->
